@@ -1,10 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, Share } from "react-native";
 import { DeviceMotion } from "expo-sensors";
 
 export default function GameScreen() {
     const [paused, set_paused] = useState(false);
     const [color, set_color] = useState("white");
+
+    const share = async color => {
+        try {
+          const result = await Share.share({
+            message: `Check out this wonderful color: ${color}`
+          });
+    
+          if (result.action === Share.sharedAction) {
+            if (result.activityType) {
+              console.log("shared with activity type of", result.activityType);
+            } else {
+              console.log("shared");
+            }
+          } else if (result.action === Share.dismissedAction) {
+            console.log("dismissed");
+          }
+        } catch (error) {
+          Alert.alert(error.message);
+          console.log("failed sharing:", error);
+        }
+      };
 
   useEffect(() => {
     DeviceMotion.setUpdateInterval(250);
@@ -49,6 +70,12 @@ export default function GameScreen() {
           }}
         />
       </View>
+      <Button
+        title="Share this color!"
+        onPress={() => {
+          share(color);
+        }}
+      />
     </View>
   );
 }

@@ -19,7 +19,7 @@ export default function App() {
         headerTitleAlign: "center"
     }}
       >
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: "Welcome!" }}/>
         <Stack.Screen name="Game" component={GameScreen} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -2,19 +2,39 @@ import React, { useState } from "react";
 import { Text, TouchableWithoutFeedback, View, Animated } from "react-native";
 
 export default function MyButton({ title, onPress }) {
+    const [pressedAnim] = useState(() => new Animated.Value(0));
+
+    const scale = pressedAnim.interpolate({
+        inputRange: [0, 1],
+        outputRange: [1, 0.9]
+      });
+
+      const backgroundColor = pressedAnim.interpolate({
+        inputRange: [0, 1],
+        outputRange: ["white", "rgba(255, 255, 255, 0.4)"]
+      });
+
   return (
     <TouchableWithoutFeedback
       onPressIn={e => {
-        console.log("user pressed my button");
+        Animated.spring(pressedAnim, {
+        toValue: 1,
+        speed: 50,
+        bounciness: 10
+        }).start();
       }}
       onPressOut={e => {
-        console.log("user released my button");
+        Animated.spring(pressedAnim, {
+            toValue: 0,
+            speed: 30,
+            bounciness: 25
+          }).start();
       }}
       onPress={onPress}
     >
-      <View
+      <Animated.View
         style={{
-          backgroundColor: "white",
+          backgroundColor,
           width: 200,
 
           paddingHorizontal: 12,
@@ -23,7 +43,8 @@ export default function MyButton({ title, onPress }) {
           borderRadius: 4,
           borderColor: "black",
           flexDirection: "row",
-          justifyContent: "center"
+          justifyContent: "center",
+          transform: [{ scale }]
         }}
       >
         <Text
@@ -35,7 +56,7 @@ export default function MyButton({ title, onPress }) {
         >
           {title}
         </Text>
-      </View>
+        </Animated.View>
     </TouchableWithoutFeedback>
   );
 }

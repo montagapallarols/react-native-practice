@@ -3,7 +3,7 @@ import { View, Text, Button, Share } from "react-native";
 import { DeviceMotion } from "expo-sensors";
 import MyButton from "../components/MyButton";
 
-export default function GameScreen() {
+export default function GameScreen({navigation}) {
     const [paused, set_paused] = useState(false);
     const [color, set_color] = useState("white");
 
@@ -77,6 +77,7 @@ export default function GameScreen() {
           share(color);
         }}
       />
+      <Button title="Go to Home" onPress={() => navigation.goBack()} />
     </View>
   );
 }

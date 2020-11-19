@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Button, Share } from "react-native";
 import { DeviceMotion } from "expo-sensors";
+import MyButton from "../components/MyButton";
 
 export default function GameScreen() {
     const [paused, set_paused] = useState(false);
@@ -63,14 +64,14 @@ export default function GameScreen() {
         Choose your color!
       </Text>
       <View style={{ marginBottom: 20 }}>
-        <Button
+        <MyButton
           title={paused ? "Restart" : "Pause"}
           onPress={() => {
             set_paused(!paused);
           }}
         />
       </View>
-      <Button
+      <MyButton
         title="Share this color!"
         onPress={() => {
           share(color);

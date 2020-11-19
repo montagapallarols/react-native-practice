@@ -1,25 +1,15 @@
 import React from "react";
-import { View } from "react-native";
+import GameScreen from "./screens/GameScreen";
 
 export default function App() {
-  return (
-    <View style={{ flexDirection: "column", justifyContent: "space-around", alignItems: "center", height: "100%" }}>
-      <View
-        style={{ width: "20%", height: "30%", backgroundColor: "rebeccapurple" }}
-      />
-      <View style={{ width: "50%", height: "20%", backgroundColor: "crimson" }} />
-      <View style={{ width: "80%", height: "20%", backgroundColor: "gold" }} />
-    </View>
-  );
+  return <GameScreen />;
 }
 
 
 
+
+
 // flexDirection, alignItems, justifyContent, alignSelf
-
-
-
-
 
 
 

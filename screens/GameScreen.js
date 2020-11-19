@@ -79,7 +79,7 @@ export default function GameScreen({route, navigation}) {
           share(color);
         }}
       />
-      <Button title="Go to Home" onPress={() => navigation.goBack()} />
+      <Button title="Go to Home" onPress={() => navigation.navigate("Home", { count: count + 1 })} />
       <Text style={{ fontWeight: "bold", fontSize: 20 }}>Times i've been here: {count}</Text>
     </View>
   );
